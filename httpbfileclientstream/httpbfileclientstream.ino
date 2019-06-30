@@ -31,7 +31,7 @@ void loop() {
 
     Serial.print("begin\n");
 
-    http.begin(client, "http://jigsaw.w3.org/HTTP/connection.html");
+    http.begin(client, "http://jigsaw.w3.org/HTTP/connection.html"); //url
 //      http.begin(client, "http://karanrathore.me");
   
     int httpCode = http.GET();

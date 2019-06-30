@@ -1,3 +1,4 @@
+//https://www.getpostman.com/downloads/
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
  
@@ -21,7 +22,7 @@ void setup() {
 
     server.on("/", root) ; //call root funtion
  
-    server.on("/body", handleBody); //Associate the handler function to the path
+    server.on("/body", handleBody); //send here post request
 
     
     server.begin(); //Start the server
@@ -44,12 +45,11 @@ void root(){
  
 void handleBody() { //Handler for the body path
  
-//      if (server.hasArg("plain")== false){ //Check if body received
-//            server.send(200, "text/plain", "Body not received");
-//            Serial.println(server.args());
-//            return;
-//  
-//      }
+      if (server.hasArg("plain")== false){ //Check if body received
+            server.send(200, "text/plain", "Body not received");
+            Serial.println(server.args());
+            return;
+      }
  
       String message = "Body received:\n";
              message += server.arg("plain");
