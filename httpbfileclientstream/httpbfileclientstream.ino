@@ -2,7 +2,6 @@
 //http://jsonplaceholder.typicode.com/
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
-
 #include <ESP8266HTTPClient.h>
 
 ESP8266WiFiMulti WiFiMulti;
@@ -67,7 +66,7 @@ void loop() {
 //          }
 //
 //          // write it to Serial
-//          Serial.write(buff, c);
+//          Serial.write(buff, c); //important funtion
 //
 //          if (len > 0) {
 //            len -= c;

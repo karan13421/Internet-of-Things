@@ -1,0 +1,52 @@
+from flask import Flask, request, redirect, url_for
+
+app=Flask(__name__)
+
+sensor1 = 1
+sensor2 = 2
+
+@app.errorhandler(404) 
+def non_existant_route(error):
+    return redirect(url_for('index'))
+
+@app.route("/")
+def index() :
+    return """
+    karan rathore
+    update urls are :
+    /sesnor1/<value>
+    /sensor2/<value>
+    
+    get urls are :
+    /data/sesnor1
+    /data/sensor2"""
+    
+    
+@app.route("/sensor1/<int:value>")
+def sensor1_listener(value) :
+    global sensor1
+    sensor1 = value
+    return "Ok"
+    
+@app.route("/sensor2/<int:value>")
+def sensor2_listener(value):
+    global sensor2
+    sensor2 = value
+    return "Ok"
+    
+@app.route("/data/<name>")
+def getdata(name) :
+    if name == "sensor1" :
+        return str(sensor1)
+    if name == "sensor2" :
+        return str(sensor2)
+    
+    return "Please give sensor name"
+
+    
+    
+    
+if __name__== "__main__":
+   app.run(host="0.0.0.0", port="5006")
+   #app.run()
+    

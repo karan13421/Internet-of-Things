@@ -5,19 +5,20 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 
-const IPAddress apIP(192, 168, 1, 1);
-const char* apSSID = "Ma hu don";
+const IPAddress apIP(192, 168, 1, 4);
+const IPAddress gateway(192, 168, 1, 1);
+const char* apSSID = "ESP8266 SSID";
 String lalodata = "ok";
 
 DNSServer dnsServer;
-ESP8266WebServer webServer(80);
+ESP8266WebServer webServer(80);  // webServer(PORT_NUMBER)
 int data = 0;
 
 void setup() {
   Serial.begin(9600);
   delay(10);
   WiFi.mode(WIFI_AP);
-  WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0));
+  WiFi.softAPConfig(apIP, gateway, IPAddress(255, 255, 255, 0));  //sof
   WiFi.softAP(apSSID);
   dnsServer.start(53, "meriwebsite.karan", apIP);  //(PORT, "domainname", "ip")
   Serial.print("begin");
@@ -40,9 +41,18 @@ void loop() {
 }
 
 void startWebServer() {
+    //webServer.on("/", function());
+
+
   webServer.on("/", []() {
+String data1="<p><karan rathore<br> <div style=\"color:red;\"> Rollno:"+lalodata+"</div></p>";
+    webServer.send(200, "text/html", makePage("Give me title", data1));
+  });
+  
+    webServer.on("/info", []() {
     webServer.send(200, "text/html", makePage("Give me title", lalodata));
   });
+
 
   webServer.begin();
 }

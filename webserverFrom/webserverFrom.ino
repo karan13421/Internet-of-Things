@@ -22,8 +22,10 @@ void setup() {
 
 
     server.on("/", root) ; //call root funtion
+
+    server.on("/form", form);
  
-    server.on("/body", handleBody); //send here post request
+    server.on("/result", handleBody); //send here post request
 
     
     server.begin(); //Start the server
@@ -39,24 +41,30 @@ void loop() {
 
 void root(){
 
-    String lalodata = "<h1>Kuch tum bhi to karo</h1>";
-    server.send(200, "text/html", makePage("Give me title bro", lalodata));
-  
+    String lalodata = "<h1>Main Page</h1><p><a href=\"/form\">Form Link</a></p>";
+    server.send(200, "text/html", makePage("Welcome", lalodata));
+}
+
+void form(){
+  String createform = "<h1>Fill Form</h1><br>";
+  createform += "<form method=\"get\" action=\"/result\">";
+  createform += "<h3>Name :</h3><br><input name=\"name\" type=\"text\" > <br>";
+  createform += "<input type=\"submit\" value=\"Submit\">";
+
+  server.send(200, "text/html", makePage("Fill From", createform));
 }
  
 void handleBody() { //Handler for the body path
  
-      if (server.hasArg("plain")== false){ //Check if body received
-            server.send(200, "text/plain", "Body not received");
-            Serial.println(server.args());
+      if (server.hasArg("name")== false){ //Check if body received
+            server.send(200, "text/plain", "Name value not present");
             return;
       }
  
-      String message = "Body received:\n";
-             message += server.arg("plain");
-             message += "\n";
+      String message = "Name received:";
+             message += server.arg("name");
  
-      server.send(200, "text/plain", message);
+      server.send(200, "text/plain", makePage("Result", message));
       Serial.println(message);
 }
 
