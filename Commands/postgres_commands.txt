@@ -1,0 +1,32 @@
+
+#start postgres
+su - postgres
+
+#list out users
+psql -l
+
+#to select user postgres
+psql postgres
+
+
+#List of tablespaces
+\db
+
+#List of tablespaces
+\l
+
+#to select or connect to database
+\c <databasename>
+
+#to list out tables in database
+\d 
+
+#To know about coloums in a table
+\d <tablename>
+
+#
+createdb -O user dbname
+
+#
+createuser --interactive --pwprompt
+

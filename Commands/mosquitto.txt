@@ -1,0 +1,21 @@
+sudo systemctl start snap.mosquitto.mosquitto.service
+
+
+mosquitto_sub -h localhost -t test
+
+
+mosquitto_pub -h localhost -t test -m "hello world"
+
+
+sudo systemctl stop snap.mosquitto.mosquitto.service
+
+
+
+//https://www.instructables.com/id/How-to-Use-MQTT-With-the-Raspberry-Pi-and-ESP8266/
+
+test.mosquitto.org
+
+
+https://www.maketecheasier.com/fix-wi-fi-not-working-ubuntu/
+https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx#Broadcom_STA_Wireless_driver
+
