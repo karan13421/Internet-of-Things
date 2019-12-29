@@ -1,0 +1,1 @@
+openssl x509 -in xxx-certificate.pem.crt -out cert.der -outform DER

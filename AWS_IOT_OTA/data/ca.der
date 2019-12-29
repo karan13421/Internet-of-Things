@@ -1,0 +1,1 @@
+openssl x509 -in AmazonRootCA1.pem -out ca.der -outform DER
